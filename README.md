@@ -2,4 +2,4 @@
 
 1) Open ```https://demoqa.com/automation-practice-form```
 2) Test form (```inputs, calendar, screenshot uploader, etc```)
-3) Modal window should have your: ```text, pictures, etc```
+3) Modal window should have your text, file or picture.
