@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
-public class FormTest {
+public class FormTest extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
     CalendarComponent birthDay = new CalendarComponent();
     OutputModalPage outputModalPage = new OutputModalPage();
@@ -20,8 +20,7 @@ public class FormTest {
 
     @Test
     void automationFormTest() {
-        String URL = "https://demoqa.com/automation-practice-form",
-        firstName = faker.name().firstName(),
+        String firstName = faker.name().firstName(),
          lastName = faker.name().lastName(),
          studentEmail = faker.internet().emailAddress(),
          userNumber = faker.number().digits(10),
