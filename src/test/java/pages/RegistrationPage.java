@@ -19,12 +19,6 @@ public class RegistrationPage {
             hobbies = $("#hobbiesWrapper");
 
 
-    public RegistrationPage openForm(String URL){
-        open(URL);
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        return this;
-    }
-
     public RegistrationPage fillFirstName(String firstName){
         firstNameInput.val(firstName);
         return this;

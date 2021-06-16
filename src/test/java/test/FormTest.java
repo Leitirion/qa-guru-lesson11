@@ -1,3 +1,4 @@
+package test;
 
 import com.github.javafaker.Faker;
 import components.CalendarComponent;
@@ -6,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import pages.OutputModalPage;
 import pages.RegistrationPage;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
 public class FormTest {
@@ -33,7 +37,8 @@ public class FormTest {
          gender = "Female";
 
         step("Open page", () -> {
-            registrationPage.openForm(URL);
+            open("https://demoqa.com/automation-practice-form");
+            $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         });
 
         step("Fill common data", () -> {
