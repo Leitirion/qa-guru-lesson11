@@ -7,9 +7,6 @@ import org.junit.jupiter.api.Test;
 import pages.OutputModalPage;
 import pages.RegistrationPage;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
 public class FormTest extends TestBase {
@@ -20,24 +17,24 @@ public class FormTest extends TestBase {
 
     @Test
     void automationFormTest() {
-        String firstName = faker.name().firstName(),
-         lastName = faker.name().lastName(),
-         studentEmail = faker.internet().emailAddress(),
-         userNumber = faker.number().digits(10),
-         dayOfBirth = "01",
-         monthOfBirth = "April",
-         yearOfBirth = "2001",
-         picture = "TestPicture.png",
-         subject1 = "History",
-         hobby1 = "Music",
-         address = faker.address().fullAddress(),
-         state = "NCR",
-         city = "Noida",
-         gender = "Female";
+        String URL = "https://demoqa.com/automation-practice-form",
+                firstName = faker.name().firstName(),
+                lastName = faker.name().lastName(),
+                studentEmail = faker.internet().emailAddress(),
+                userNumber = faker.number().digits(10),
+                dayOfBirth = "01",
+                monthOfBirth = "April",
+                yearOfBirth = "2001",
+                picture = "TestPicture.png",
+                subject1 = "History",
+                hobby1 = "Music",
+                address = faker.address().fullAddress(),
+                state = "NCR",
+                city = "Noida",
+                gender = "Female";
 
         step("Open page", () -> {
-            open("https://demoqa.com/automation-practice-form");
-            $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+            registrationPage.openForm(URL);
         });
 
         step("Fill common data", () -> {
