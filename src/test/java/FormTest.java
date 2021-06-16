@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import pages.OutputModalPage;
 import pages.RegistrationPage;
 
+import static io.qameta.allure.Allure.step;
+
 public class FormTest {
     RegistrationPage registrationPage = new RegistrationPage();
     CalendarComponent birthDay = new CalendarComponent();
@@ -30,23 +32,38 @@ public class FormTest {
          city = "Noida",
          gender = "Female";
 
-        registrationPage
-                .openForm(URL)
-                .fillFirstName(firstName)
-                .fillLastName(lastName)
-                .fillEmail(studentEmail)
-                .selectGender(gender)
-                .fillPhone(userNumber);
-        birthDay.setDate(dayOfBirth, monthOfBirth, yearOfBirth);
-        registrationPage
-                .fillSubject(subject1)
-                .selectHobby(hobby1)
-                .uploadPicture(picture)
-                .fillAddress(address, state, city)
-                .submitEnter();
+        step("Open page", () -> {
+            registrationPage.openForm(URL);
+        });
 
-        outputModalPage.elementShouldHaveTextInModalWindow(address, state, city, firstName, lastName, userNumber,
-                studentEmail, gender, dayOfBirth, monthOfBirth, yearOfBirth, subject1, hobby1, picture);
+        step("Fill common data", () -> {
+            registrationPage
+                    .fillFirstName(firstName)
+                    .fillLastName(lastName)
+                    .fillEmail(studentEmail)
+                    .selectGender(gender)
+                    .fillPhone(userNumber);
+        });
 
+        step("Set birthday", () -> {
+            birthDay.setDate(dayOfBirth, monthOfBirth, yearOfBirth);
+        });
+
+        step("Set subjects and hobby", () -> {
+            registrationPage
+                    .fillSubject(subject1)
+                    .selectHobby(hobby1)
+                    .uploadPicture(picture)
+                    .fillAddress(address, state, city);
+        });
+
+        step("Submit form", () -> {
+            registrationPage.submitEnter();
+        });
+
+        step("Verify successful form submit", () -> {
+            outputModalPage.elementShouldHaveTextInModalWindow(address, state, city, firstName, lastName, userNumber,
+                    studentEmail, gender, dayOfBirth, monthOfBirth, yearOfBirth, subject1, hobby1, picture);
+        });
     }
 }
