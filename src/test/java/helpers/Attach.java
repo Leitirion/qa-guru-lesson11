@@ -63,14 +63,13 @@ public class Attach {
         }
     }
 
-//added readProperty
     public static String readProperty() {
         return System.getProperty("selenoidUrl");
     }
-    //^
+
     public static URL getVideoUrl(String sessionId) {
         String videoUrl = String.format("https://%s/video/" + sessionId + ".mp4", readProperty());
-//added ^
+
         try {
             return new URL(videoUrl);
         } catch (MalformedURLException e) {
