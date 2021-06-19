@@ -3,6 +3,7 @@ package helpers;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -16,6 +17,8 @@ import java.nio.charset.StandardCharsets;
 import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.openqa.selenium.logging.LogType.BROWSER;
+
+import org.aeonbits.owner.Config;
 
 public class Attach {
     @Attachment(value = "{attachName}", type = "text/plain")
@@ -60,9 +63,14 @@ public class Attach {
         }
     }
 
+//added readProperty
+    public static String readProperty() {
+        return System.getProperty("selenoidUrl");
+    }
+    //^
     public static URL getVideoUrl(String sessionId) {
-        String videoUrl = "https://selenoid.autotests.cloud/video/" + sessionId + ".mp4";
-
+        String videoUrl = String.format("https://%s/video/" + sessionId + ".mp4", readProperty());
+//added ^
         try {
             return new URL(videoUrl);
         } catch (MalformedURLException e) {

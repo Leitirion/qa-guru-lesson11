@@ -7,17 +7,22 @@ repositories {
     mavenCentral()
 }
 
-def allureVersion = "2.13.8",
-    selenideVersion = "5.22.0",
-    junitVersion = "5.7.2"
+ext {
+    junitVersion = '5.7.1'
+    aspecjweaverVersion = "1.9.6"
+    slf4jVersion = "1.7.30"
+    selenideVersion = '5.21.0'
+    allureVersion = "2.14.0"
+    ownerVersion = "1.0.12"
+}
 
 allure {
-    version = allureVersion
-    autoconfigure = true
+    version = "$allureVersion"
     aspectjweaver = true
-    configuration = "testImplementation"
+    autoconfigure = true
+
     useJUnit5 {
-        version = allureVersion
+        version = "$allureVersion"
     }
 }
 
@@ -26,7 +31,7 @@ dependencies {
             "com.codeborne:selenide:$selenideVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "com.github.javafaker:javafaker:1.0.2",
-
+            "org.aeonbits.owner:owner:${ownerVersion}",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
@@ -38,13 +43,6 @@ tasks.withType(JavaCompile) {
 }
 
 tasks.withType(Test) {
-    useJUnitPlatform()
-
-    testLogging {
-        lifecycle {
-//            events "started", "failed"
-            events "started", "skipped", "failed", "standard_error", "standard_out"
-            exceptionFormat "short"
-        }
+        systemProperties(System.getProperties())
+        useJUnitPlatform()
     }
-}

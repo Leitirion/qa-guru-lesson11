@@ -1,8 +1,7 @@
 .gradle
 .idea
-.gradle
 gradlew
 gradlew.bat
 build
 gradle
-.allure
+/.allure/
